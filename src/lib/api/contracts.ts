@@ -329,3 +329,4 @@ export type NftUpdatedEvent = EventEnvelope<
 export type OrderUpdatedEvent = EventEnvelope<'order.updated', { order: Order }>
 
 export type RealtimeEvent = NftUpdatedEvent | OrderUpdatedEvent
+

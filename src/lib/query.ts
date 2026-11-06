@@ -49,3 +49,4 @@ export function clearUserScopedCache(qc: QueryClient = queryClient) {
   qc.removeQueries({ queryKey: ['orders'] })
   qc.removeQueries({ queryKey: ['profile'] })
 }
+

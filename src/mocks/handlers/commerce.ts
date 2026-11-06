@@ -491,3 +491,4 @@ function validateWallet(body: Partial<WalletInput>): Response | null {
 export function resetCommerceCounters() {
   appliedCheckoutScenarios.clear()
 }
+

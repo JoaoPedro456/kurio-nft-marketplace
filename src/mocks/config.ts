@@ -119,3 +119,4 @@ export function onConfigChange(fn: (c: MockConfig) => void) {
   listeners.add(fn)
   return () => listeners.delete(fn)
 }
+

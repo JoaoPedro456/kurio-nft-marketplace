@@ -59,3 +59,4 @@ export function passwordProblem(pw: string | undefined): string | null {
   if (!/[A-Z]/.test(pw) || !/[a-z]/.test(pw) || !/\d/.test(pw)) return 'Use letras maiúsculas, minúsculas e números.'
   return null
 }
+

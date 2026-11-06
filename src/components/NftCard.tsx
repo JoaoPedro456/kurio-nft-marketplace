@@ -175,3 +175,4 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
     </article>
   )
 }
+

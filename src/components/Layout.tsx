@@ -122,7 +122,7 @@ export function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#140D0A] text-[#F5F1EB] selection:bg-[#D28A4C] selection:text-[#140D0A]">
+    <div className="min-h-screen flex flex-col bg-ink text-[#F5F1EB] selection:bg-[#D28A4C] selection:text-[#140D0A]">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[#D28A4C] focus:text-[#140D0A] focus:px-4 focus:py-2 focus:rounded-md focus:font-bold"
@@ -189,7 +189,7 @@ export function Layout({ children }: LayoutProps) {
 
       {/* Main Header */}
       <header
-        className={`sticky top-0 z-30 bg-[#140D0A]/95 backdrop-blur-sm ${
+        className={`sticky top-0 z-30 bg-ink/95 backdrop-blur-sm ${
           showHeaderDivider ? 'border-b border-[#3F2319]' : ''
         }`}
       >
@@ -373,7 +373,7 @@ export function Layout({ children }: LayoutProps) {
                 placeholder="Buscar por nome do NFT, coleção ou criador..."
                 aria-label="Buscar NFTs"
                 autoFocus
-                className="flex-1 h-10 px-3.5 rounded-[5px] bg-[#140D0A] border border-[#3F2319] text-sm text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
+                className="flex-1 h-10 px-3.5 rounded-[5px] bg-ink border border-[#3F2319] text-sm text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
               />
               <button
                 type="submit"
@@ -435,7 +435,7 @@ export function Layout({ children }: LayoutProps) {
                 type="email"
                 required
                 placeholder="Digite seu e-mail..."
-                className="flex-1 h-10 px-3.5 rounded-[5px] bg-[#140D0A] border border-[#3F2319] text-xs text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
+                className="flex-1 h-10 px-3.5 rounded-[5px] bg-ink border border-[#3F2319] text-xs text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
               />
               <button
                 type="submit"
@@ -559,7 +559,7 @@ export function Layout({ children }: LayoutProps) {
             <p className="text-xs text-[#CFB28C]">
               Transações verificadas em múltiplas redes com conversão automática.
             </p>
-            <div className="inline-block px-3 py-2 rounded bg-[#140D0A] border border-[#3F2319] text-[#E89B55] font-bold text-xs">
+            <div className="inline-block px-3 py-2 rounded bg-ink border border-[#3F2319] text-[#E89B55] font-bold text-xs">
               Aceitamos: ETH • MATIC • USDC • WETH
             </div>
           </div>
@@ -618,3 +618,4 @@ export function Layout({ children }: LayoutProps) {
     </div>
   )
 }
+

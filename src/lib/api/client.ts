@@ -344,3 +344,4 @@ export const api = {
     sessionStore.setWalletConnection(null)
   },
 }
+

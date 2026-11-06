@@ -50,3 +50,4 @@ if (shouldEagerStartMocks) {
   window.addEventListener('keydown', triggerOnce, { once: true, passive: true })
   window.addEventListener('touchstart', triggerOnce, { once: true, passive: true })
 }
+

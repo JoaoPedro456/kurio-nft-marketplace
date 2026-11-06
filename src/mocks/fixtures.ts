@@ -287,3 +287,4 @@ export const SEED_USERS = [
     bio: 'Fã de música, fotografia e edições raras.',
   },
 ] as const
+

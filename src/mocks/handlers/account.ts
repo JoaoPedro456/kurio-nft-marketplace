@@ -313,3 +313,4 @@ export const catalogHandlers = [
 export function resetCatalogCounters() {
   catalogFailures = 0
 }
+

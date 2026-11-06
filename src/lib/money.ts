@@ -59,3 +59,4 @@ export function formatEth(
 export function formatEthLabel(value: EthAmount, maxDecimals = 4): string {
   return `${formatEth(value, maxDecimals)} ETH`
 }
+

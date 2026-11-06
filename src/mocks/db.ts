@@ -244,3 +244,4 @@ export function toPublicOrder(o: OrderRecord): Order {
 }
 
 export type { AppliedCoupon, BuyerInfo }
+

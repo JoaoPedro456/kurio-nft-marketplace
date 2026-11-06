@@ -708,66 +708,71 @@ export function HomePage() {
         </div>
       )}
 
-      <section id="criadores" aria-label="Coleções em destaque" className="scroll-mt-24 grid grid-cols-1 md:grid-cols-2 gap-7">
-        <div className="rounded-[6px] bg-[#241612] border border-[#3F2319] p-6 flex flex-col sm:flex-row items-center gap-6">
+      <section id="criadores" aria-label="Coleções em destaque" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-2 gap-7">
+        <div className="h-[250px] relative rounded-[8px] bg-[#241612] border border-[#3F2319] overflow-hidden p-6 flex flex-col justify-between">
           <img
-            src="/images/nfts/nft-11.png"
+            src="/images/nfts/nft-2.png"
             alt="Lançamentos gênesis de edição limitada"
-            width={200}
-            height={200}
+            width={280}
+            height={250}
             loading="lazy"
-            className="w-40 h-40 sm:w-48 sm:h-48 rounded-[6px] object-cover shrink-0 border border-[#3F2319]"
+            className="w-[240px] sm:w-[280px] h-[250px] rounded-l-[8px] object-cover absolute left-0 top-0 border-r border-[#3F2319]"
           />
-          <div className="space-y-3 text-center sm:text-left sm:ml-auto">
-            <h2 className="text-lg font-bold uppercase text-[#F5F1EB] leading-6">
-              Lançamentos gênesis de edição limitada
-            </h2>
-            <p className="text-xs sm:text-sm text-[#CFB28C] leading-6">
-              Somos um marketplace Web3 dedicado a arte digital rara e colecionáveis verificados.
-            </p>
+          <div className="ml-auto w-[240px] sm:w-[260px] text-right flex flex-col justify-between h-full relative z-10">
+            <div>
+              <h2 className="font-bold text-[18px] text-[#F5F1EB] leading-[24px]">
+                Lançamentos gênesis<br />de edição limitada
+              </h2>
+              <p className="font-normal text-[14px] text-[#CFB28C] leading-[24px] mt-2">
+                Colecione edições escassas diretamente dos criadores antes da revelação pública.
+              </p>
+            </div>
             <Link
               to="/nfts/$nftId"
               params={{ nftId: 'nft-2' }}
-              className="h-10 px-5 rounded-[6px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-medium text-xs uppercase inline-flex items-center gap-2 transition-colors"
+              className="h-[40px] px-6 rounded-[6px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-medium text-[14px] ml-auto inline-flex items-center gap-2 transition-colors"
             >
-              <span>Ver coleção</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Explorar</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
 
-        <div className="rounded-[6px] bg-[#241612] border border-[#3F2319] p-6 flex flex-col sm:flex-row items-center gap-6">
+        <div className="h-[250px] relative rounded-[8px] bg-[#241612] border border-[#3F2319] overflow-hidden p-6 flex flex-col justify-between">
           <img
-            src="/images/nfts/nft-12.png"
+            src="/images/nfts/nft-5.png"
             alt="Arte digital selecionada e muito mais"
-            width={200}
-            height={200}
+            width={280}
+            height={250}
             loading="lazy"
-            className="w-40 h-40 sm:w-48 sm:h-48 rounded-[6px] object-cover shrink-0 border border-[#3F2319]"
+            className="w-[240px] sm:w-[280px] h-[250px] rounded-l-[8px] object-cover absolute left-0 top-0 border-r border-[#3F2319]"
           />
-          <div className="space-y-3 text-center sm:text-left sm:ml-auto">
-            <h2 className="text-lg font-bold uppercase text-[#F5F1EB] leading-6">
-              Arte digital selecionada e muito mais
-            </h2>
-            <p className="text-xs sm:text-sm text-[#CFB28C] leading-6">
-              Curadoria exclusiva de artistas independentes com liquidez imediata em ETH.
-            </p>
+          <div className="ml-auto w-[240px] sm:w-[260px] text-right flex flex-col justify-between h-full relative z-10">
+            <div>
+              <h2 className="font-bold text-[18px] text-[#F5F1EB] leading-[24px]">
+                Arte digital selecionada<br />e muito mais
+              </h2>
+              <p className="font-normal text-[14px] text-[#CFB28C] leading-[24px] mt-2">
+                Explore novos artistas, coleções verificadas e obras digitais que definem a cultura.
+              </p>
+            </div>
             <Link
               to="/nfts/$nftId"
               params={{ nftId: 'nft-5' }}
-              className="h-10 px-5 rounded-[6px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-medium text-xs uppercase inline-flex items-center gap-2 transition-colors"
+              className="h-[40px] px-6 rounded-[6px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-medium text-[14px] ml-auto inline-flex items-center gap-2 transition-colors"
             >
-              <span>Explorar agora</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Explorar</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      <section id="diario-cunhagem" aria-label="Diário da Cunhagem" className="scroll-mt-24 space-y-6">
+      {/* Figma Pixel-Accurate Diário da Cunhagem */}
+      <section id="diario-cunhagem" aria-label="Diário da Cunhagem" className="scroll-mt-24 space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-[30px] font-bold text-[#F5F1EB]">Diário da Cunhagem</h2>
-          <p className="text-xs sm:text-sm text-[#CFB28C] max-w-xl mx-auto">
+          <h2 className="font-bold text-[28px] text-[#F7F3EC]">Diário da Cunhagem</h2>
+          <p className="font-normal text-[14px] text-[#CFB28C] max-w-xl mx-auto">
             Fique por dentro de lançamentos de criadores, movimentos de colecionadores e novidades
             do ecossistema Web3.
           </p>

@@ -1,5 +1,10 @@
 # KURIO — NFT Marketplace (Desafio Técnico Frontend)
 
+[![CI](https://github.com/JoaoPedro456/kurio-nft-marketplace/actions/workflows/ci.yml/badge.svg)](https://github.com/JoaoPedro456/kurio-nft-marketplace/actions/workflows/ci.yml)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-success?logo=vercel)](https://kurio-nft-marketplace-fawn.vercel.app)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-100%20%2F%20100-success?logo=lighthouse)](https://github.com/JoaoPedro456/kurio-nft-marketplace)
+[![Playwright](https://img.shields.io/badge/Playwright-24%20Passing-brightgreen?logo=playwright)](https://github.com/JoaoPedro456/kurio-nft-marketplace)
+
 Aplicação web completa de marketplace de NFTs (**KURIO**), construída com **React 19**, **TypeScript**, **Vite**, **TanStack Router**, **TanStack Query**, **Axios**, **Socket.IO (`socket.io-client`)**, **Tailwind CSS v4**, **MSW v2 (`msw` + `@mswjs/socket.io-binding`)**, **Playwright** e **Lighthouse CI**.
 
 ---

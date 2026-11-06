@@ -370,12 +370,6 @@ export function HomePage() {
                 className="h-24 w-24 rounded-xl object-cover"
                 aria-hidden="true"
               />
-              <img
-                src="/assets/nft/nft-artwork-07.png"
-                alt=""
-                className="absolute -bottom-3 -left-4 h-12 w-12 rounded-lg object-cover"
-                aria-hidden="true"
-              />
             </div>
           </div>
           <div className="px-5 pb-5">
@@ -429,11 +423,6 @@ export function HomePage() {
                 src="/assets/nft/nft-artwork-03.png"
                 alt="Emerald Ape #042 — Arte em destaque"
                 className="aspect-square w-full rounded-2xl object-cover shadow-2xl"
-              />
-              <img
-                src="/assets/nft/nft-artwork-07.png"
-                alt="Sage Nomad #009 — Arte secundária"
-                className="absolute bottom-8 left-8 h-32 w-32 rounded-xl object-cover shadow-2xl border-2 border-[#F5F1EB]/10"
               />
             </div>
           </div>

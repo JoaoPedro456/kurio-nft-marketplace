@@ -4,14 +4,12 @@ import {
   AlertTriangle,
   Heart,
   Home,
-  LogIn,
   LogOut,
   Search,
   ShoppingBag,
+  ShoppingCart,
   Sparkles,
   User as UserIcon,
-  Wallet,
-  Wifi,
   WifiOff,
   X,
 } from 'lucide-react'
@@ -26,6 +24,49 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
+const FOOTER_HIGHLIGHTS = [
+  {
+    letter: 'W',
+    title: 'Segurança da carteira',
+    text: 'Proteja sua carteira e colecione arte digital verificada com confiança.',
+  },
+  {
+    letter: 'C',
+    title: 'Criadores em destaque',
+    text: 'Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.',
+  },
+  {
+    letter: 'D',
+    title: 'Alertas de lançamentos',
+    text: 'Receba calendários de cunhagem, novidades de listas de acesso e análises do mercado.',
+  },
+] as const
+
+const FOOTER_COLUMNS = [
+  {
+    title: 'Meu perfil',
+    items: ['Meu perfil', 'Minha coleção', 'Atividade', 'Estúdio do criador', 'Lista de interesse'],
+  },
+  {
+    title: 'Central de ajuda',
+    items: ['Central de ajuda', 'Como comprar NFTs', 'Carteira e segurança', 'Política do mercado', 'Denunciar item'],
+  },
+  {
+    title: 'Coleções',
+    items: ['Arte digital', 'Fotografia', 'Música', 'Arte 3D', 'Utilidade'],
+  },
+] as const
+
+const SOCIAL_LINKS = [
+  { label: 'Facebook', short: 'f' },
+  { label: 'Instagram', short: 'ig' },
+  { label: 'X (Twitter)', short: 'X' },
+  { label: 'LinkedIn', short: 'in' },
+  { label: 'YouTube', short: '▶' },
+] as const
+
+const COMPATIBLE_WALLETS = ['MetaMask', 'WalletConnect', 'Coinbase'] as const
+
 export function Layout({ children }: LayoutProps) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -36,15 +77,12 @@ export function Layout({ children }: LayoutProps) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchInput, setSearchInput] = useState('')
 
-  const cartCount = cart?.summary.itemCount ?? cart?.items.reduce((acc, item) => acc + item.quantity, 0) ?? 0
+  const cartCount =
+    cart?.summary.itemCount ?? cart?.items.reduce((acc, item) => acc + item.quantity, 0) ?? 0
   const favCount = favorites?.nftIds.length ?? 0
 
   const pathname = location.pathname
-  const showHeaderDivider =
-    pathname === '/' ||
-    pathname.startsWith('/account') ||
-    pathname === '/login' ||
-    pathname === '/register'
+  const isNftDetail = pathname.startsWith('/nfts')
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -122,7 +160,7 @@ export function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-ink text-[#F5F1EB] selection:bg-[#D28A4C] selection:text-[#140D0A]">
+    <div className="min-h-screen flex flex-col overflow-x-hidden bg-[#140D0A] text-[#F5F1EB] selection:bg-[#D28A4C] selection:text-[#140D0A]">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[#D28A4C] focus:text-[#140D0A] focus:px-4 focus:py-2 focus:rounded-md focus:font-bold"
@@ -188,96 +226,73 @@ export function Layout({ children }: LayoutProps) {
       )}
 
       {/* Main Header */}
-      <header
-        className={`sticky top-0 z-30 bg-ink/95 backdrop-blur-sm ${
-          showHeaderDivider ? 'border-b border-[#3F2319]' : ''
-        }`}
-      >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-[74px] flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-30 border-b border-[#3A251C]/60 bg-[#140D0A]">
+        <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-4 sm:px-6">
           <Link
             to="/"
-            className="flex items-center gap-2 text-[#F5F1EB] font-bold text-sm tracking-[1.4px] uppercase py-2 focus-visible:outline-none"
+            className="text-sm font-bold tracking-[0.3em] text-[#F5F1EB] uppercase transition-colors hover:text-[#E09550] focus-visible:outline-none"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D28A4C] inline-block" />
-            <span>KURIO</span>
+            KURIO
           </Link>
 
-          <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-8 h-full">
+          <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-8">
             <Link
               to="/"
               onClick={handleInicioClick}
-              className={`relative h-full flex items-center text-sm transition-colors ${
+              className={`rounded-sm border-b-2 px-1 pb-1 text-xs font-bold tracking-wide transition-colors ${
                 pathname === '/'
-                  ? 'text-[#F5F1EB] font-bold'
-                  : 'text-[#CFB28C] hover:text-[#F5F1EB]'
+                  ? 'border-[#E09550] text-[#E09550]'
+                  : 'border-transparent text-[#F5F1EB] hover:text-[#E09550]'
               }`}
             >
               Início
-              {pathname === '/' && (
-                <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#D28A4C]" />
-              )}
             </Link>
             <a
               href="/#catalogo-nfts"
               onClick={handleMercadoClick}
-              className={`relative h-full flex items-center text-sm transition-colors cursor-pointer ${
-                pathname.startsWith('/nfts')
-                  ? 'text-[#F5F1EB] font-bold'
-                  : 'text-[#CFB28C] hover:text-[#F5F1EB]'
+              className={`cursor-pointer rounded-sm border-b-2 px-1 pb-1 text-xs font-bold tracking-wide transition-colors ${
+                isNftDetail
+                  ? 'border-[#E09550] text-[#E09550]'
+                  : 'border-transparent text-[#F5F1EB] hover:text-[#E09550]'
               }`}
             >
               Mercado
-              {pathname.startsWith('/nfts') && (
-                <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#D28A4C]" />
-              )}
             </a>
             <a
               href="/#criadores"
               onClick={handleCriadoresClick}
-              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors cursor-pointer"
+              className="cursor-pointer rounded-sm border-b-2 border-transparent px-1 pb-1 text-xs font-bold tracking-wide text-[#F5F1EB] transition-colors hover:text-[#E09550]"
             >
               Criadores
             </a>
             <a
               href="/#diario-cunhagem"
               onClick={handleAprendaClick}
-              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors cursor-pointer"
+              className="cursor-pointer rounded-sm border-b-2 border-transparent px-1 pb-1 text-xs font-bold tracking-wide text-[#F5F1EB] transition-colors hover:text-[#E09550]"
             >
               Aprenda
             </a>
           </nav>
 
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div
+          <div className="flex items-center gap-4">
+            <span
               data-testid="realtime-status"
               data-status={realtime.status}
-              title={
-                realtime.status === 'connected'
-                  ? 'Socket.IO conectado em tempo real'
-                  : 'Socket.IO reconectando'
-              }
-              className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded bg-[#241612] border border-[#3F2319] text-[11px] text-[#CFB28C]"
+              role="status"
+              className="sr-only"
             >
-              {realtime.status === 'connected' ? (
-                <>
-                  <Wifi className="w-3 h-3 text-[#4E9B6F]" />
-                  <span>Live</span>
-                </>
-              ) : (
-                <>
-                  <WifiOff className="w-3 h-3 text-[#F0805F]" />
-                  <span>Offline</span>
-                </>
-              )}
-            </div>
+              {realtime.status === 'connected'
+                ? 'Atualizações em tempo real conectadas'
+                : 'Atualizações em tempo real reconectando'}
+            </span>
 
             <button
               type="button"
               aria-label="Abrir busca rápida"
               onClick={() => setSearchOpen((v) => !v)}
-              className="w-11 h-11 flex items-center justify-center rounded-md text-[#F5F1EB] hover:bg-[#241612] transition-colors"
+              className="rounded-sm p-2 text-[#CFB28C] transition-colors hover:text-[#F5F1EB]"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-[18px] h-[18px]" />
             </button>
 
             {session && (
@@ -285,14 +300,14 @@ export function Layout({ children }: LayoutProps) {
                 to="/account/profile"
                 aria-label={`Favoritos (${favCount})`}
                 data-testid="header-favorites-link"
-                className="relative w-11 h-11 hidden sm:flex items-center justify-center rounded-md text-[#F5F1EB] hover:bg-[#241612] transition-colors"
+                className="relative hidden sm:flex items-center justify-center rounded-sm p-2 text-[#CFB28C] hover:text-[#F5F1EB] transition-colors"
               >
-                <Heart className="w-5 h-5 text-[#E89B55]" />
+                <Heart className="w-[18px] h-[18px] text-[#E89B55]" />
                 {favCount > 0 && (
                   <span
                     aria-hidden="true"
                     data-testid="header-favorites-badge"
-                    className="absolute top-1.5 right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-[#2F1D15] border border-[#D28A4C] text-[#E89B55] text-[10px] font-bold flex items-center justify-center"
+                    className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-[#2F1D15] border border-[#D28A4C] text-[#E89B55] text-[10px] font-bold flex items-center justify-center"
                   >
                     {favCount}
                   </span>
@@ -304,13 +319,17 @@ export function Layout({ children }: LayoutProps) {
               to="/cart"
               aria-label={`Carrinho de compras (${cartCount} itens)`}
               data-testid="header-cart-link"
-              className="relative w-11 h-11 flex items-center justify-center rounded-md text-[#F5F1EB] hover:bg-[#241612] transition-colors"
+              className="relative rounded-sm p-2 text-[#CFB28C] transition-colors hover:text-[#E09550]"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingCart className="w-[18px] h-[18px]" strokeWidth={1.8} />
               <span
                 aria-hidden="true"
                 data-testid="header-cart-badge"
-                className="absolute top-1.5 right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#D28A4C] text-[#140D0A] text-[10px] font-bold flex items-center justify-center"
+                className={
+                  cartCount > 0
+                    ? 'absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D28A4C] px-1 text-[10px] font-bold leading-none text-[#140D0A]'
+                    : 'sr-only'
+                }
               >
                 {cartCount}
               </span>
@@ -351,17 +370,16 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to="/login"
                 data-testid="header-login-link"
-                className="h-[35px] px-4 rounded-[6px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-medium text-sm flex items-center gap-1.5 transition-colors"
+                className="inline-flex h-9 items-center justify-center rounded-md bg-[#D28A4C] px-5 text-[11px] font-bold uppercase tracking-wide text-[#140D0A] transition-colors hover:bg-[#E09550]"
               >
-                <LogIn className="w-4 h-4" />
-                <span>Entrar</span>
+                Entrar
               </Link>
             )}
           </div>
         </div>
 
         {searchOpen && (
-          <div className="border-t border-[#3F2319] bg-[#241612] px-4 py-3">
+          <div className="border-t border-[#3A251C]/60 bg-[#241612] px-4 py-3">
             <form
               onSubmit={handleSearchSubmit}
               className="max-w-[1200px] mx-auto flex items-center gap-2"
@@ -373,7 +391,7 @@ export function Layout({ children }: LayoutProps) {
                 placeholder="Buscar por nome do NFT, coleção ou criador..."
                 aria-label="Buscar NFTs"
                 autoFocus
-                className="flex-1 h-10 px-3.5 rounded-[5px] bg-ink border border-[#3F2319] text-sm text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
+                className="flex-1 h-10 px-3.5 rounded-[5px] bg-[#140D0A] border border-[#3F2319] text-sm text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
               />
               <button
                 type="submit"
@@ -398,175 +416,126 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
 
-      <footer className="mt-16 bg-[#241612] border-t border-[#3F2319] text-[#CFB28C] pb-20 md:pb-0">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 border-b border-[#3F2319] grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-3 space-y-2">
-            <div className="flex items-center gap-2 text-[#E89B55] font-bold text-sm">
-              <Sparkles className="w-4 h-4" />
-              <span>Custódia verificada</span>
+      <footer className="bg-[#140D0A] pb-24 md:pb-0">
+        <div className="mx-auto w-full max-w-[1200px] px-4 pb-10 pt-14 md:px-6">
+          <div className="overflow-hidden rounded-2xl bg-[#241612]">
+            {/* Tier 1: Medallions + Newsletter */}
+            <div className="grid gap-10 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-[#3A251C]/60 lg:px-8">
+              {FOOTER_HIGHLIGHTS.map((item) => (
+                <section
+                  key={item.title}
+                  className="lg:px-7 lg:first:pl-2 lg:last:pr-2"
+                >
+                  <div
+                    aria-hidden="true"
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-[#D28A4C] text-xl font-bold text-[#140D0A]"
+                  >
+                    {item.letter}
+                  </div>
+                  <h3 className="mt-5 text-base font-bold text-[#F5F1EB]">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#CFB28C]">{item.text}</p>
+                </section>
+              ))}
+
+              <section aria-label="Receba novidades da Kurio" className="lg:px-7">
+                <h3 className="text-base font-bold leading-snug text-[#F5F1EB]">
+                  Antecipe-se ao próximo lançamento
+                </h3>
+                <form
+                  className="mt-4 flex"
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    toast.success('Inscrição confirmada na newsletter da Kurio!')
+                  }}
+                >
+                  <label htmlFor="newsletter-email" className="sr-only">
+                    Digite seu e-mail
+                  </label>
+                  <input
+                    id="newsletter-email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="digite seu e-mail..."
+                    className="h-11 w-full min-w-0 rounded-l-md bg-[#38220F] px-2.5 text-xs text-[#F5F1EB] placeholder:text-[10px] placeholder:text-[#CFB28C]/60 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#E09550]"
+                  />
+                  <button
+                    type="submit"
+                    className="h-11 shrink-0 rounded-r-md bg-[#D28A4C] px-3.5 text-xs font-bold text-[#140D0A] transition-colors hover:bg-[#E09550]"
+                  >
+                    Enviar
+                  </button>
+                </form>
+                <p className="mt-4 text-sm leading-relaxed text-[#CFB28C]">
+                  Receba lançamentos selecionados, histórias de criadores e novidades do mercado.
+                </p>
+              </section>
             </div>
-            <p className="text-xs leading-5 text-[#CFB28C]">
-              Contratos inteligentes auditados e autenticidade on-chain garantida em cada edição.
-            </p>
-          </div>
-          <div className="md:col-span-3 space-y-2">
-            <div className="flex items-center gap-2 text-[#E89B55] font-bold text-sm">
-              <Wallet className="w-4 h-4" />
-              <span>Liquidação instantânea</span>
+
+            {/* Tier 2: Brand Band */}
+            <div className="grid items-center gap-4 bg-[#38220F] px-6 py-6 text-sm text-[#F5F1EB] sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+              <span className="text-sm font-bold tracking-[0.3em] text-[#F5F1EB]">KURIO</span>
+              <p>
+                Feito para colecionadores,
+                <br className="hidden lg:block" /> criadores e cultura
+              </p>
+              <p>contato@email.com</p>
+              <p className="lg:text-right">+55 11 4002 8922</p>
             </div>
-            <p className="text-xs leading-5 text-[#CFB28C]">
-              Cotações em ETH em tempo real e proteção contra variação brusca de gás.
-            </p>
-          </div>
-          <div className="md:col-span-6 space-y-2">
-            <h2 className="text-sm font-bold text-[#F5F1EB]">Assine a newsletter da Kurio</h2>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                toast.success('Inscrição confirmada na newsletter da Kurio!')
-              }}
-              className="flex flex-col sm:flex-row gap-2"
-            >
-              <label htmlFor="newsletter-email" className="sr-only">
-                Seu e-mail para newsletter
-              </label>
-              <input
-                id="newsletter-email"
-                type="email"
-                required
-                placeholder="Digite seu e-mail..."
-                className="flex-1 h-10 px-3.5 rounded-[5px] bg-ink border border-[#3F2319] text-xs text-[#F5F1EB] placeholder-[#B39463] focus:border-[#D28A4C] focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="h-10 px-5 rounded-[5px] bg-[#D28A4C] hover:bg-[#E89B55] text-[#140D0A] font-bold text-xs uppercase transition-colors"
-              >
-                Participar
-              </button>
-            </form>
-            <p className="text-[11px] leading-4 text-[#B39463]">
-              Receba alertas de drops gênesis, leilões raros e análises de curadoria semanalmente.
-            </p>
-          </div>
-        </div>
 
-        <div className="bg-[#2F1D15]/70 border-b border-[#3F2319]">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4 text-xs">
-            <span className="font-bold tracking-[1.2px] text-[#F5F1EB] uppercase">KURIO</span>
-            <span>Kurio Labs • Av. Paulista, 1000 • São Paulo, SP</span>
-            <span>suporte@kurio.art</span>
-            <span>Discord • @kurio_nft</span>
-          </div>
-        </div>
+            {/* Tier 3: Directory Links & Socials */}
+            <div className="grid gap-10 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+              {FOOTER_COLUMNS.map((col) => (
+                <section key={col.title}>
+                  <h3 className="text-lg font-bold text-[#F5F1EB]">{col.title}</h3>
+                  <ul className="mt-4 space-y-3">
+                    {col.items.map((item) => (
+                      <li
+                        key={item}
+                        aria-disabled="true"
+                        className="cursor-default text-sm text-[#F5F1EB]"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
 
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
-          <div>
-            <h3 className="text-sm font-bold text-[#F5F1EB] mb-3">Minha conta</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/account/profile" className="hover:text-[#F5F1EB] transition-colors">
-                  Meu perfil
-                </Link>
-              </li>
-              <li>
-                <Link to="/account/wallets" className="hover:text-[#F5F1EB] transition-colors">
-                  Carteiras conectadas
-                </Link>
-              </li>
-              <li>
-                <Link to="/cart" className="hover:text-[#F5F1EB] transition-colors">
-                  Carrinho e reservas
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="hover:text-[#F5F1EB] transition-colors">
-                  Entrar / Criar conta
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold text-[#F5F1EB] mb-3">Ajuda e guia</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#diario-cunhagem" className="hover:text-[#F5F1EB] transition-colors">
-                  Como comprar NFTs
-                </a>
-              </li>
-              <li>
-                <a href="#diario-cunhagem" className="hover:text-[#F5F1EB] transition-colors">
-                  Taxas de rede (Gas)
-                </a>
-              </li>
-              <li>
-                <a href="#diario-cunhagem" className="hover:text-[#F5F1EB] transition-colors">
-                  Segurança de carteiras
-                </a>
-              </li>
-              <li>
-                <a href="#diario-cunhagem" className="hover:text-[#F5F1EB] transition-colors">
-                  Autenticidade on-chain
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold text-[#F5F1EB] mb-3">Categorias</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/"
-                  search={{ category: 'art' }}
-                  className="hover:text-[#F5F1EB] transition-colors"
-                >
-                  Arte generativa & PFP
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  search={{ category: 'collectibles' }}
-                  className="hover:text-[#F5F1EB] transition-colors"
-                >
-                  Colecionáveis 3D
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  search={{ category: 'photography' }}
-                  className="hover:text-[#F5F1EB] transition-colors"
-                >
-                  Fotografia & Surrealismo
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  search={{ category: 'music' }}
-                  className="hover:text-[#F5F1EB] transition-colors"
-                >
-                  Áudio & Sintetizadores
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="space-y-3">
-            <h3 className="text-sm font-bold text-[#F5F1EB]">Redes suportadas</h3>
-            <p className="text-xs text-[#CFB28C]">
-              Transações verificadas em múltiplas redes com conversão automática.
-            </p>
-            <div className="inline-block px-3 py-2 rounded bg-ink border border-[#3F2319] text-[#E89B55] font-bold text-xs">
-              Aceitamos: ETH • MATIC • USDC • WETH
+              <section>
+                <h3 className="text-lg font-bold text-[#F5F1EB]">Redes sociais</h3>
+                <div className="mt-4 flex gap-2">
+                  {SOCIAL_LINKS.map((s) => (
+                    <span
+                      key={s.label}
+                      role="img"
+                      aria-label={s.label}
+                      className="flex h-9 w-9 items-center justify-center rounded-md border border-[#D28A4C]/70 text-xs font-bold text-[#D28A4C]"
+                    >
+                      {s.short}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="mt-8 text-lg font-bold text-[#F5F1EB]">Carteiras compatíveis</h3>
+                <div className="mt-3 flex items-center justify-center gap-1.5 overflow-x-auto whitespace-nowrap rounded-md border border-[#D28A4C]/40 bg-[#38220F] px-2 py-2.5">
+                  {COMPATIBLE_WALLETS.map((w, idx) => (
+                    <span key={w} className="inline-flex items-center gap-1.5">
+                      {idx > 0 && (
+                        <span aria-hidden="true" className="text-[10px] text-[#D28A4C]/80">
+                          •
+                        </span>
+                      )}
+                      <span className="text-[10px] font-bold uppercase text-[#D28A4C]">{w}</span>
+                    </span>
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
-        </div>
 
-        <div className="border-t border-[#3F2319] py-4 text-center text-xs text-[#B39463]">
-          © 2021 Kurio. Todos os direitos reservados.
+          <p className="mt-8 text-center text-sm text-[#F5F1EB]">
+            © 2026 Kurio. Propriedade digital para todos.
+          </p>
         </div>
       </footer>
 
@@ -618,4 +587,3 @@ export function Layout({ children }: LayoutProps) {
     </div>
   )
 }
-

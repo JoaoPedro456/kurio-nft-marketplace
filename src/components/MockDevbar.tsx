@@ -61,7 +61,11 @@ export function MockDevbar() {
           onClick={() => setOpen(true)}
           data-testid="mock-devbar-toggle"
           aria-label="Simulador MSW — abrir painel de cenários simulados"
-          className="flex items-center gap-2 rounded-full border border-[#55321F] bg-[#241612]/95 px-3.5 py-2 text-[#F5F1EB] shadow-lg backdrop-blur hover:border-[#D28A4C]"
+          className={
+            typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('devbar')
+              ? 'flex items-center gap-2 rounded-full border border-[#55321F] bg-[#241612]/95 px-3.5 py-2 text-[#F5F1EB] shadow-lg backdrop-blur hover:border-[#D28A4C]'
+              : 'sr-only focus:not-sr-only focus:flex focus:items-center focus:gap-2 focus:rounded-full focus:border focus:border-[#55321F] focus:bg-[#241612]/95 focus:px-3.5 focus:py-2 focus:text-[#F5F1EB]'
+          }
         >
           <Settings2 className="size-4 text-[#E89B55]" />
           <span>Simulador MSW</span>

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from '@tanstack/react-router'
-import { Heart, Search, ShoppingBag } from 'lucide-react'
+import { Heart, ShoppingBag } from 'lucide-react'
 import { toast } from 'sonner'
 import { AppApiError } from '@/lib/api/client'
 import type { Nft } from '@/lib/api/contracts'
@@ -24,7 +24,7 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
     nft.editions.find((ed) => ed.enabled && ed.available > 0) ?? nft.editions[0]
 
   const isSoldOut = nft.totalAvailable <= 0 || !defaultEdition || defaultEdition.available <= 0
-  const coverImage = nft.images[0]?.src ?? '/images/nfts/nft-1.png'
+  const coverImage = nft.images[0]?.src ?? '/assets/nft/nft-artwork-03.png'
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -62,31 +62,31 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
   return (
     <article
       data-testid={`nft-card-${nft.id}`}
-      className="group relative flex flex-col bg-transparent rounded-[6px] transition-transform"
+      className="group relative flex flex-col transition-transform"
     >
-      <div className="relative w-full aspect-[258/300] bg-[#241612] rounded-[6px] overflow-hidden border border-[#3F2319] group-hover:border-[#D28A4C] transition-colors">
+      <div className="relative rounded-lg bg-[#241612] p-2 transition-colors group-hover:bg-[#2E1B14]">
         <Link
           to="/nfts/$nftId"
           params={{ nftId: nft.id }}
           aria-label={`Ver detalhes de ${nft.name}`}
-          className="block w-full h-full"
+          className="block relative aspect-square w-full rounded-md overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-[#E09550]"
         >
           <img
             src={coverImage}
             alt={nft.name}
-            width={258}
+            width={300}
             height={300}
             loading={priority ? 'eager' : 'lazy'}
             fetchPriority={priority ? 'high' : 'auto'}
             decoding={priority ? 'sync' : 'async'}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300 rounded-md"
           />
         </Link>
 
         {nft.badge && (
           <span
             data-testid={`nft-badge-${nft.id}`}
-            className="absolute top-3 left-3 px-2.5 py-1 rounded bg-[#D28A4C] text-[#140D0A] text-[11px] font-bold uppercase tracking-wider shadow"
+            className="absolute top-4 left-4 px-2 py-0.5 rounded bg-[#D28A4C] text-[#140D0A] text-[10px] font-bold uppercase tracking-wider shadow"
           >
             {nft.badge}
           </span>
@@ -95,13 +95,13 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
         {isSoldOut && (
           <span
             data-testid={`nft-soldout-${nft.id}`}
-            className="absolute top-3 right-3 px-2.5 py-1 rounded bg-[#140D0A]/90 border border-[#F0805F] text-[#F0805F] text-[11px] font-bold uppercase"
+            className="absolute top-4 right-4 px-2 py-0.5 rounded bg-[#140D0A]/90 border border-[#F0805F] text-[#F0805F] text-[10px] font-bold uppercase"
           >
             Esgotado
           </span>
         )}
 
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2.5 opacity-95 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 transition-opacity">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-95 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 transition-opacity">
           <button
             type="button"
             onClick={handleQuickAdd}
@@ -109,9 +109,9 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
             data-testid={`nft-quick-add-${nft.id}`}
             aria-label={`Adicionar ${nft.name} ao carrinho`}
             title="Adicionar ao carrinho"
-            className="w-[38px] h-[38px] rounded-[6px] bg-[#241612]/95 border border-[#3F2319] hover:border-[#D28A4C] text-[#F5F1EB] hover:text-[#E89B55] disabled:opacity-40 flex items-center justify-center shadow-md transition-colors"
+            className="w-8 h-8 rounded bg-[#140D0A]/90 border border-[#3A251C] hover:border-[#D28A4C] text-[#F5F1EB] hover:text-[#E09550] disabled:opacity-40 flex items-center justify-center shadow-md transition-colors"
           >
-            <ShoppingBag className="w-4 h-4" />
+            <ShoppingBag className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -119,60 +119,32 @@ export function NftCard({ nft, priority = false }: NftCardProps) {
             onClick={handleToggleFavorite}
             data-testid={`nft-fav-btn-${nft.id}`}
             aria-pressed={isFavorite}
-            aria-label={
-              isFavorite ? `Remover ${nft.name} dos favoritos` : `Favoritar ${nft.name}`
-            }
+            aria-label={isFavorite ? `Remover ${nft.name} dos favoritos` : `Favoritar ${nft.name}`}
             title={isFavorite ? 'Remover dos favoritos' : 'Favoritar'}
-            className={`w-[38px] h-[38px] rounded-[6px] bg-[#241612]/95 border ${
+            className={`w-8 h-8 rounded bg-[#140D0A]/90 border ${
               isFavorite
-                ? 'border-[#E89B55] text-[#E89B55]'
-                : 'border-[#3F2319] text-[#F5F1EB] hover:border-[#D28A4C] hover:text-[#E89B55]'
+                ? 'border-[#E09550] text-[#E09550]'
+                : 'border-[#3A251C] text-[#F5F1EB] hover:border-[#D28A4C] hover:text-[#E09550]'
             } flex items-center justify-center shadow-md transition-colors`}
           >
-            <Heart className={`w-4 h-4 ${isFavorite ? 'fill-[#E89B55]' : ''}`} />
+            <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-[#E09550]' : ''}`} />
           </button>
-
-          <Link
-            to="/nfts/$nftId"
-            params={{ nftId: nft.id }}
-            aria-label={`Abrir página de ${nft.name}`}
-            title="Ver detalhes"
-            className="w-[38px] h-[38px] rounded-[6px] bg-[#241612]/95 border border-[#3F2319] hover:border-[#D28A4C] text-[#F5F1EB] hover:text-[#E89B55] flex items-center justify-center shadow-md transition-colors"
-          >
-            <Search className="w-4 h-4" />
-          </Link>
         </div>
       </div>
 
-      <div className="pt-3 flex flex-col gap-1">
-        <div className="flex items-center justify-between gap-2">
-          <Link
-            to="/nfts/$nftId"
-            params={{ nftId: nft.id }}
-            className="text-base leading-4 text-[#F5F1EB] hover:text-[#E89B55] truncate transition-colors"
-          >
-            {nft.name}
-          </Link>
-          <span className="text-[11px] text-[#B39463] shrink-0 uppercase">
-            {nft.network ?? 'ethereum'}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-3 mt-0.5">
-          <span
-            data-testid={`nft-price-${nft.id}`}
-            className="text-lg leading-5 font-bold text-[#E89B55]"
-          >
-            {formatEth(nft.floorPrice, { withSymbol: false })} ETH
-          </span>
-          {nft.compareAtPrice && (
-            <span className="text-base leading-4 text-[#B39463] line-through">
-              {formatEth(nft.compareAtPrice, { withSymbol: false })} ETH
-            </span>
-          )}
-        </div>
-      </div>
+      <Link
+        to="/nfts/$nftId"
+        params={{ nftId: nft.id }}
+        className="mt-3 truncate px-1 text-base font-bold text-[#F5F1EB] hover:text-[#E09550] transition-colors"
+      >
+        {nft.name}
+      </Link>
+      <p
+        data-testid={`nft-price-${nft.id}`}
+        className="mt-1 px-1 pb-1 text-base font-bold text-[#E09550]"
+      >
+        {formatEth(nft.floorPrice, { withSymbol: false })} ETH
+      </p>
     </article>
   )
 }
-

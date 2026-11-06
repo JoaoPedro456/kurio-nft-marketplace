@@ -68,7 +68,7 @@ export function NftDetailPage() {
   }, [maxAllowed, quantity])
 
   if (isLoading) {
-    const knownImg = /^nft-([1-9]|1[0-6])$/.test(nftId) ? `/images/nfts/${nftId}.png` : null
+    const knownImg = /^nft-([1-9]|1[0-6])$/.test(nftId) ? `/images/nfts/${nftId}.webp` : null
     return (
       <div
         data-testid="nft-detail-loading"
@@ -136,15 +136,15 @@ export function NftDetailPage() {
   const isSoldOut =
     !selectedEdition || !selectedEdition.enabled || selectedEdition.available <= 0
 
-  const mainImageSrc = nft.images[0]?.src ?? '/images/nfts/nft-1.png'
+  const mainImageSrc = nft.images[0]?.src ?? '/images/nfts/nft-1.webp'
   const galleryImages =
     nft.images.length >= 4
       ? nft.images.map((i) => i.src)
       : [
           mainImageSrc,
-          nft.images[1]?.src ?? '/images/nfts/nft-6.png',
-          nft.images[2]?.src ?? '/images/nfts/nft-7.png',
-          '/images/nfts/nft-8.png',
+          nft.images[1]?.src ?? '/images/nfts/nft-6.webp',
+          nft.images[2]?.src ?? '/images/nfts/nft-7.webp',
+          '/images/nfts/nft-8.webp',
         ]
 
   const handleAddToCart = (goToCart = false) => {

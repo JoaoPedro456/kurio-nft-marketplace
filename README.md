@@ -11,8 +11,8 @@ Aplicação web completa de marketplace de NFTs (**KURIO**), construída com **R
 
 ## 🌐 URL Pública de Produção
 
-- **URL Oficial de Produção:** [https://kurio-nft-marketplace-joaopedro456s-projects.vercel.app](https://kurio-nft-marketplace-joaopedro456s-projects.vercel.app)
-- **URL Alternativa (Vercel):** [https://kurio-nft-marketplace-fawn.vercel.app](https://kurio-nft-marketplace-fawn.vercel.app)
+- **URL de Produção (Vercel):** [https://kurio-nft-marketplace-fawn.vercel.app](https://kurio-nft-marketplace-fawn.vercel.app)
+- **Repositório GitHub:** [https://github.com/JoaoPedro456/kurio-nft-marketplace](https://github.com/JoaoPedro456/kurio-nft-marketplace)
 - Toda a camada de simulação (**MSW REST + Socket.IO WebSocket via Service Worker**) está ativa em produção, permitindo testar qualquer fluxo, latência, erro ou evento em tempo real diretamente pelo navegador sem necessitar de backend externo.
 
 ---

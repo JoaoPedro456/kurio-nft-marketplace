@@ -60,6 +60,46 @@ export function Layout({ children }: LayoutProps) {
     setSearchOpen(false)
   }
 
+  const scrollToSection = (id: string) => {
+    if (pathname === '/') {
+      const el = document.getElementById(id)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        return
+      }
+    }
+    navigate({ to: '/' }).then(() => {
+      setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  }
+
+  const handleInicioClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
+  const handleMercadoClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    scrollToSection('catalogo-nfts')
+  }
+
+  const handleCriadoresClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    scrollToSection('criadores')
+  }
+
+  const handleAprendaClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    scrollToSection('diario-cunhagem')
+  }
+
   const handleLogout = async () => {
     try {
       await api.logout()
@@ -165,6 +205,7 @@ export function Layout({ children }: LayoutProps) {
           <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-8 h-full">
             <Link
               to="/"
+              onClick={handleInicioClick}
               className={`relative h-full flex items-center text-sm transition-colors ${
                 pathname === '/'
                   ? 'text-[#F5F1EB] font-bold'
@@ -176,45 +217,31 @@ export function Layout({ children }: LayoutProps) {
                 <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#D28A4C]" />
               )}
             </Link>
-            <Link
-              to="/"
-              search={{ sort: 'recent' }}
-              className={`relative h-full flex items-center text-sm transition-colors ${
-                pathname.startsWith('/nfts') ||
-                pathname.startsWith('/cart') ||
-                pathname.startsWith('/checkout')
+            <a
+              href="/#catalogo-nfts"
+              onClick={handleMercadoClick}
+              className={`relative h-full flex items-center text-sm transition-colors cursor-pointer ${
+                pathname.startsWith('/nfts')
                   ? 'text-[#F5F1EB] font-bold'
                   : 'text-[#CFB28C] hover:text-[#F5F1EB]'
               }`}
             >
               Mercado
-              {(pathname.startsWith('/nfts') ||
-                pathname.startsWith('/cart') ||
-                pathname.startsWith('/checkout')) && (
+              {pathname.startsWith('/nfts') && (
                 <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#D28A4C]" />
               )}
-            </Link>
+            </a>
             <a
-              href="#criadores"
-              onClick={(e) => {
-                if (pathname !== '/') {
-                  e.preventDefault()
-                  navigate({ to: '/' })
-                }
-              }}
-              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors"
+              href="/#criadores"
+              onClick={handleCriadoresClick}
+              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors cursor-pointer"
             >
               Criadores
             </a>
             <a
-              href="#diario-cunhagem"
-              onClick={(e) => {
-                if (pathname !== '/') {
-                  e.preventDefault()
-                  navigate({ to: '/' })
-                }
-              }}
-              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors"
+              href="/#diario-cunhagem"
+              onClick={handleAprendaClick}
+              className="relative h-full flex items-center text-sm text-[#CFB28C] hover:text-[#F5F1EB] transition-colors cursor-pointer"
             >
               Aprenda
             </a>
@@ -549,6 +576,7 @@ export function Layout({ children }: LayoutProps) {
       >
         <Link
           to="/"
+          onClick={handleInicioClick}
           className={`flex flex-col items-center justify-center min-h-[44px] text-[11px] ${
             pathname === '/' ? 'text-[#E89B55] font-bold' : 'text-[#CFB28C]'
           }`}
@@ -556,16 +584,16 @@ export function Layout({ children }: LayoutProps) {
           <Home className="w-5 h-5 mb-0.5" />
           <span>Início</span>
         </Link>
-        <Link
-          to="/"
-          search={{ sort: 'recent' }}
-          className={`flex flex-col items-center justify-center min-h-[44px] text-[11px] ${
+        <a
+          href="/#catalogo-nfts"
+          onClick={handleMercadoClick}
+          className={`flex flex-col items-center justify-center min-h-[44px] text-[11px] cursor-pointer ${
             pathname.startsWith('/nfts') ? 'text-[#E89B55] font-bold' : 'text-[#CFB28C]'
           }`}
         >
           <Sparkles className="w-5 h-5 mb-0.5" />
           <span>Mercado</span>
-        </Link>
+        </a>
         <Link
           to="/cart"
           className={`relative flex flex-col items-center justify-center min-h-[44px] text-[11px] ${

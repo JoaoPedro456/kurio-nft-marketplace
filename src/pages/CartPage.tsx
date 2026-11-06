@@ -88,7 +88,7 @@ export function CartPage() {
           Início
         </Link>
         <span>/</span>
-        <Link to="/" className="hover:text-[#F5F1EB]">
+        <Link to="/" hash="catalogo-nfts" className="hover:text-[#F5F1EB]">
           Mercado
         </Link>
         <span>/</span>

@@ -87,10 +87,30 @@ export function HomePage() {
   const [heroSlide, setHeroSlide] = useState(0)
 
   useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash
+      if (hash) {
+        const id = hash.replace('#', '')
+        const el = document.getElementById(id)
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' })
+          }, 100)
+        }
+      }
+    }
+
+    handleHashScroll()
+    window.addEventListener('hashchange', handleHashScroll)
+    return () => window.removeEventListener('hashchange', handleHashScroll)
+  }, [])
+
+  useEffect(() => {
     setSearchInput(search.q ?? '')
     setMinPriceInput(search.minPrice ?? '')
     setMaxPriceInput(search.maxPrice ?? '')
   }, [search.q, search.minPrice, search.maxPrice])
+
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -417,7 +437,7 @@ export function HomePage() {
       <section
         id="catalogo-nfts"
         aria-label="Catálogo de NFTs"
-        className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+        className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
       >
         <aside className="hidden lg:block lg:col-span-3 space-y-6">
           {sidebarContent}
@@ -688,7 +708,7 @@ export function HomePage() {
         </div>
       )}
 
-      <section id="criadores" aria-label="Coleções em destaque" className="grid grid-cols-1 md:grid-cols-2 gap-7">
+      <section id="criadores" aria-label="Coleções em destaque" className="scroll-mt-24 grid grid-cols-1 md:grid-cols-2 gap-7">
         <div className="rounded-[6px] bg-[#241612] border border-[#3F2319] p-6 flex flex-col sm:flex-row items-center gap-6">
           <img
             src="/images/nfts/nft-11.png"
@@ -744,7 +764,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="diario-cunhagem" aria-label="Diário da Cunhagem" className="space-y-6">
+      <section id="diario-cunhagem" aria-label="Diário da Cunhagem" className="scroll-mt-24 space-y-6">
         <div className="text-center space-y-2">
           <h2 className="text-2xl sm:text-[30px] font-bold text-[#F5F1EB]">Diário da Cunhagem</h2>
           <p className="text-xs sm:text-sm text-[#CFB28C] max-w-xl mx-auto">

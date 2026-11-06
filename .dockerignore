@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.github
+.lighthouseci
+lighthouse-reports
+playwright-report
+test-results
+.vercel

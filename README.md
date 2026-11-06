@@ -36,6 +36,12 @@ npm run preview -- --port 4173
 ```
 Acesse `http://localhost:4173`.
 
+### 4. Executar via Docker (Opcional)
+```bash
+docker compose up --build
+```
+Acesse `http://localhost:3000`.
+
 ---
 
 ## 🧪 Como Executar Testes E2E, Regressão Visual e Lighthouse

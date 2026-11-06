@@ -146,3 +146,13 @@ window.__mock.dropSocket()
 window.__mock.replayEvents({ duplicateLast: true, staleVersion: true })
 window.__mock.expireCurrentSession()
 ```
+
+---
+
+## 📚 Documentação Técnica Complementar
+
+- 🏛️ [`ARCHITECTURE.md`](./ARCHITECTURE.md): Contratos de dados, trade-offs técnicos, reconciliação de cache e política de idempotência.
+- 📊 [`ARCHITECTURE_DIAGRAM.md`](./ARCHITECTURE_DIAGRAM.md): Diagramas de fluxo e sequência em Mermaid para checkout e eventos em tempo real.
+- 📋 [`INTERVIEW_CHEATSHEET.md`](./INTERVIEW_CHEATSHEET.md): Guia de consulta rápida de 1 página para a entrevista técnica.
+- 🖥️ [`presentation.html`](./presentation.html): Apresentação interativa de slides em HTML/JS pronta para uso em reuniões de avaliação técnica.
+

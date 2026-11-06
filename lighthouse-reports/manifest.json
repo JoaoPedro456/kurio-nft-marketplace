@@ -1,0 +1,74 @@
+[
+  {
+    "url": "http://localhost:4173/?net=instant",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_49_18.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_49_18.report.json",
+    "summary": {
+      "performance": 0.91,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  },
+  {
+    "url": "http://localhost:4173/?net=instant",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_49_41.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_49_41.report.json",
+    "summary": {
+      "performance": 0.91,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  },
+  {
+    "url": "http://localhost:4173/nfts/nft-1?net=instant",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_50_26.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_50_26.report.json",
+    "summary": {
+      "performance": 0.92,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  },
+  {
+    "url": "http://localhost:4173/nfts/nft-1?net=instant",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_51_06.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_51_06.report.json",
+    "summary": {
+      "performance": 0.93,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  },
+  {
+    "url": "http://localhost:4173/?net=instant",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_50_04.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost--2026_11_06_00_50_04.report.json",
+    "summary": {
+      "performance": 0.91,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  },
+  {
+    "url": "http://localhost:4173/nfts/nft-1?net=instant",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_50_46.report.html",
+    "jsonPath": "C:\\Users\\joaop\\.gemini\\antigravity\\scratch\\nft-marketplace\\lighthouse-reports\\localhost-nfts_nft_1-2026_11_06_00_50_46.report.json",
+    "summary": {
+      "performance": 0.93,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.92
+    }
+  }
+]
